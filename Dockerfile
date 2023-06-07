@@ -6,7 +6,7 @@ COPY . .
 
 RUN pip install -r requirements.txt && \
     python manage.py makemigrations && \
-    python mange.py migrate
+    python manage.py migrate
 
 EXPOSE 8000
 
