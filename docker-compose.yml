@@ -1,6 +1,15 @@
 version : "3.3"
 services :
-   web :
-     build : .
-     ports :
-       - "8000:8000"
+  web :
+    build : .
+    ports :
+      - "8000:8000"
+  
+  smtp-server:
+    image: mailhog/mailhog
+    expose:
+      - 1025
+      - 8025
+    ports:
+      - '1025:1025'
+      - '8025:8025'

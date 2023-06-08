@@ -63,7 +63,7 @@ def send_otp(email,otp):
         subject="Verify your email"
         emai_from=settings.EMAIL_HOST_USER
         recepient_list=[email,]
-        htmlgen = f'Your OTP is {otp}.Click here to verify OTP: http://127.0.0.1:8000/verify/{recepient_list}/{otp}'
+        htmlgen = f'Your OTP is {otp}.Click here to verify OTP: http://127.0.0.1:8000/verify/{email}/{otp}'
         send_mail(subject,htmlgen,emai_from,recepient_list, fail_silently=False)
     except Exception as e:
         print(e)
