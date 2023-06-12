@@ -16,9 +16,9 @@ def home(request):
         if obj.exists():
             # if check_password(password,obj.password):
                 if Profile.objects.get(user__username=email).is_verified:
-                    return HttpResponse("Login success")
+                    return render(request,"success.html",{"email":email})
                 else:
-                    return HttpResponse("Email Not verified yet.Please check your email")
+                    return render(request,"verification.html",{"email":email})
             # else:
             #     return HttpResponse("Email exists but Incorrect Password")
         else:
@@ -60,14 +60,13 @@ def generateOTP() :
 def send_otp(email,otp):
     print(email)
     try:
-        subject="Verify your email"
+        subject="OTP to verify your Email"
         emai_from=settings.EMAIL_HOST_USER
         recepient_list=[email,]
-        htmlgen = f'Your OTP is {otp}.Click here to verify OTP: http://127.0.0.1:8000/verify/{email}/{otp}'
+        htmlgen = f'Your OTP is {otp}.'
         send_mail(subject,htmlgen,emai_from,recepient_list, fail_silently=False)
     except Exception as e:
         print(e)
         return HttpResponse("Email failed to send with error: ",e)
     # return HttpResponse(o)
-    return HttpResponse("Please check your email and verify your email")
-
+    return render(request,"verification.html",{"email":email})

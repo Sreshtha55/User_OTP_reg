@@ -2,11 +2,12 @@ FROM python:3.9-alpine3.13
 
 ENV PYTHONBUFFERED=1
 
-RUN pip install --upgrade pip
+RUN pip install --upgrade pip && \
+    mkdir task
 
-COPY . .
+COPY . /task
 
-WORKDIR .
+WORKDIR /task
 
 RUN pip install -r requirements.txt && \
     python manage.py migrate
