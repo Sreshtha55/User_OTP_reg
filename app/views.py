@@ -5,11 +5,12 @@ import math, random
 from django.conf import settings
 from django.contrib.auth.models import User
 from .models import *
+from django.contrib import messages
 # from django.contrib.auth.hashers import check_password
 
 def home(request):
     if request.method=="POST":
-        email=request.POST["email"]
+        email=request.POST.get("email")
         print("Email: ",email)
         # password=request.POST["password"]
         obj=Profile.objects.filter(user__username=email)
@@ -29,6 +30,8 @@ def home(request):
                 user=user_obj,
                 email_otp=generateOTP()
             )
+            messages.info(request,"Profile Created")
+            request.session['email']=email
             return send_otp(email,p_obj.email_otp)
 
 
@@ -69,4 +72,4 @@ def send_otp(email,otp):
         print(e)
         return HttpResponse("Email failed to send with error: ",e)
     # return HttpResponse(o)
-    return render(request,"verification.html",{"email":email})
+    return render("verification.html",{"email":email})

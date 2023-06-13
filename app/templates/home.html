@@ -138,11 +138,11 @@
     <div class="main">
         <div class="col-md-6 col-sm-12">
             <div class="login-form">
-                <form method='post'>
+                <form method="post">
                     {% csrf_token %}
                     <div class="form-group">
-                        <label>Email Address</label>
-                        <input type="email" class="form-control" placeholder="Email Address">
+                        <label for="emailadd">Email Address</label>
+                        <input type="email" name="email" id="emailadd" class="form-control" placeholder="Email Address">
                     </div>
                     <button type="submit" class="btn btn-black">Login/Signup</button>
                 </form>
