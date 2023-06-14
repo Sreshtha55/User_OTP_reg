@@ -5,7 +5,9 @@ services :
     ports :
       - "8000:8000"
     volumes:
-      - myvolume:/task
+      - type: bind
+        source: .
+        target: /task
   
   smtp-server:
     image: mailhog/mailhog
@@ -15,5 +17,3 @@ services :
     ports:
       - '1025:1025'
       - '8025:8025'
-volumes:
-  myvolume:
